@@ -1,0 +1,7 @@
+Installation notes (may require admin rights):
+    run (sudo) python install.py
+    or
+    copy all .*Lexer.py files to PYGMENTS_SOURCE_FOLDER/lexers/
+    cd to that dir
+    run python _mapping.py
+    Done!
