@@ -42,8 +42,8 @@ class SassLexer(RegexLexer):
             include('comments'),
             include('variables'),
             include('punctuation'),
-            ("(^)(=)((\w|\\-)*?)$", bygroups(Text, Keyword, Name.Class)),
-            ("(^)(\\+)((\w|\\-)*?)$", bygroups(Text, Keyword, Name.Class)),
+            ("(^ *)(=)((\w|\\-)*?)$", bygroups(Text, Keyword, Name.Class)),
+            ("(^ *)(\\+)((\w|\\-)*?)$", bygroups(Text, Keyword, Name.Class)),
             ("@for(?= )" , Keyword, 'forloop'),
             #NOTE: accepts anything starting with '@' as keyword
             ("@\w+(?=\s)", Keyword, 'computations'),
@@ -51,7 +51,7 @@ class SassLexer(RegexLexer):
             ("^ *\w+", Name.Tag),
             ("#.*?(?=[^(\w|\\-)])", String),
             ("\.(\w|\\-)+", Name.Class),
-            ("^ *:[\w\-]+", Name.Attribute, 'computations'),
+            (":[\w\-]+", Name.Attribute, 'computations'),
             ("=(?= *?)", Operator, 'computations'),
             (".", Text),
         ],
@@ -63,7 +63,7 @@ class SassLexer(RegexLexer):
         ],
         'comments':[
             #Multiline
-            ("(?sm)^(?P<i> *?)/\*.*?^(?!(?P=i)(  |$))", Comment.Multiline),
+            ("(?sm)^(?P<i> *?)(/\*|//\*\*).*?^(?!(?P=i)(  |$))", Comment.Multiline),
             #Single line
             (" *?//.*$", Comment),
         ],
